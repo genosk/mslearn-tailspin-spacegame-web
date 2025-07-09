@@ -14,6 +14,12 @@ steps:
     packageType: sdk
     version: '6.x'
 
+# ✅ Add this to downgrade Node.js
+- task: UseNode@1
+  displayName: 'Use Node.js 16.x'
+  inputs:
+    version: '16.x'
+
 - task: Npm@1
   displayName: 'Run npm install'
   inputs:
@@ -39,5 +45,5 @@ steps:
   displayName: 'Build the project - Release'
   inputs:
     command: 'build'
-    arguments: '--no-restore --configuration Release'
+    arguments: '--no-restore --configuration $(buildConfiguration)'
     projects: '**/*.csproj'
